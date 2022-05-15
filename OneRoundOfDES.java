@@ -107,8 +107,7 @@ public class OneRoundOfDES  {
      return input;
  }
 
-  // ndërrojë hyrjen heksadecimal
- // sipas sekuencës së specifikuar
+  // Ndërrimi i hyrjes heksadecimale sipas sekuencës së specifikuar
  String permutation(int[] sequence, String input)
  {
      String output = "";
@@ -124,20 +123,24 @@ public class OneRoundOfDES  {
  {
      // hexadecimal ne decimal(base 10)
      long t_a = Long.parseUnsignedLong(a, 16);
+     
      // hexadecimal ne decimal(base 10)
      long t_b = Long.parseUnsignedLong(b, 16);
+     
      // xor
      t_a = t_a ^ t_b;
-     // decimal ne hexadecimal
+     
+     // Decimal në hexadecimal
      a = Long.toHexString(t_a);
-  // paraqesin 0 për të ruajtur gjatësinë
+     
+  // Paraqitja e 0 për të ruajtur gjatësinë
      while (a.length() < b.length())
          a = "0" + a;
      return a;
  }
 
 
-        // Kekimi ne s-box 
+        // Kërkimi në s-box 
         String sBox(String input)
         {
             String output = "";
@@ -161,14 +164,19 @@ public class OneRoundOfDES  {
             String left = input.substring(0, 8);
             String temp = input.substring(8, 16);
             String right = temp;
-            // Expansion permutation
+            
+            // Përmutacioni i zgjerimit
             temp = permutation(EP, temp);
+            
             // xor temp and round key
             temp = xor(temp, key);
-            // lookup in s-box table
+            
+            // Kërkimi në tabelën e s-boxit 
             temp = sBox(temp);
+            
             //  D-box
             temp = permutation(P, temp);
+            
             // xor
             left = xor(left, temp);
             System.out.println("Raundi "
@@ -177,7 +185,7 @@ public class OneRoundOfDES  {
                                + " " + left.toUpperCase() + " "
                                + key.toUpperCase());
  
-            // swapper
+            // Swapper(Ndërruesi apo këmbyesi)
             return right + left;
         }
  
@@ -185,11 +193,11 @@ public class OneRoundOfDES  {
         {
            
  
-            // Permutacioni fillestar
+            // Përmutacioni fillestar
             plainText = permutation(IP, plainText);
    
             System.out.println(
-                "Pas permutacionit fillestar: "
+                "Pas përmutacionit fillestar: "
                 + plainText.toUpperCase());
             System.out.println(
                 "Pas ndarjes: L0="
@@ -204,7 +212,7 @@ public class OneRoundOfDES  {
             plainText = plainText.substring(8, 16)
                         + plainText.substring(0, 8);
  
-            // permutacioni final
+            // Përmutacioni final
             plainText = permutation(IP1, plainText);
             return plainText;
         }
@@ -213,10 +221,10 @@ public class OneRoundOfDES  {
         {
             
  
-        	  // permutacioni fillestar
+        	  // Përmutacioni fillestar
             plainText = permutation(IP, plainText);
             System.out.println(
-                    "Pas permutacionit fillestar: "
+                    "Pas përmutacionit fillestar: "
                     + plainText.toUpperCase());
                 System.out.println(
                     "Pas ndarjes: L0="
@@ -240,9 +248,9 @@ public class OneRoundOfDES  {
         // text = 123456ABCD132536;
        //  key = AABB09182736CCDD;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Jepni celsin:");
+        System.out.println("Jepni çelsin:");
         String key = scanner.next();
-       System.out.println("Jepni tekstin per enkriptim:");
+       System.out.println("Jepni tekstin për enkriptim:");
         String text = scanner.next();
         scanner.close();
         DES cipher = new DES();
