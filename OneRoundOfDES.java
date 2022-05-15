@@ -85,3 +85,55 @@ public class OneRoundOfDES  {
               { 7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8 },
               { 2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 } }
         };
+ // Konvertimi nga hexadecimal ne binary 
+ String hextoBin(String input)
+ {
+     int n = input.length() * 4;
+     input = Long.toBinaryString(
+         Long.parseUnsignedLong(input, 16));
+     while (input.length() < n)
+         input = "0" + input;
+     return input;
+ }
+
+ // Konvertimi nga binary ne hexadecimal 
+ String binToHex(String input)
+ {
+     int n = (int)input.length() / 4;
+     input = Long.toHexString(
+         Long.parseUnsignedLong(input, 2));
+     while (input.length() < n)
+         input = "0" + input;
+     return input;
+ }
+
+  // ndërrojë hyrjen heksadecimal
+ // sipas sekuencës së specifikuar
+ String permutation(int[] sequence, String input)
+ {
+     String output = "";
+     input = hextoBin(input);
+     for (int i = 0; i < sequence.length; i++)
+         output += input.charAt(sequence[i] - 1);
+     output = binToHex(output);
+     return output;
+ }
+
+ // xor 2 hexadecimal strings
+ String xor(String a, String b)
+ {
+     // hexadecimal ne decimal(base 10)
+     long t_a = Long.parseUnsignedLong(a, 16);
+     // hexadecimal ne decimal(base 10)
+     long t_b = Long.parseUnsignedLong(b, 16);
+     // xor
+     t_a = t_a ^ t_b;
+     // decimal ne hexadecimal
+     a = Long.toHexString(t_a);
+  // paraqesin 0 për të ruajtur gjatësinë
+     while (a.length() < b.length())
+         a = "0" + a;
+     return a;
+ }
+
+
