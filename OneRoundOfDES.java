@@ -137,3 +137,63 @@ public class OneRoundOfDES  {
  }
 
 
+        // Kekimi ne s-box 
+        String sBox(String input)
+        {
+            String output = "";
+            input = hextoBin(input);
+            for (int i = 0; i < 48; i += 6) {
+                String temp = input.substring(i, i + 6);
+                int num = i / 6;
+                int row = Integer.parseInt(
+                    temp.charAt(0) + "" + temp.charAt(5), 2);
+                int col = Integer.parseInt(
+                    temp.substring(1, 5), 2);
+                output += Integer.toHexString(
+                    sbox[num][row][col]);
+            }
+            return output;
+        }
+ 
+        String round(String input, String key, int num)
+        {
+            
+            String left = input.substring(0, 8);
+            String temp = input.substring(8, 16);
+            String right = temp;
+            // Expansion permutation
+            temp = permutation(EP, temp);
+            // xor temp and round key
+            temp = xor(temp, key);
+            // lookup in s-box table
+            temp = sBox(temp);
+            //  D-box
+            temp = permutation(P, temp);
+            // xor
+            left = xor(left, temp);
+            System.out.println("Raundi "
+                               + (num + 1) + " "
+                               + right.toUpperCase()
+                               + " " + left.toUpperCase() + " "
+                               + key.toUpperCase());
+ 
+            // swapper
+            return right + left;
+        }
+ 
+        String encrypt(String plainText, String key)
+        {
+           
+ 
+            // Permutacioni fillestar
+            plainText = permutation(IP, plainText);
+   
+            System.out.println(
+                "Pas permutacionit fillestar: "
+                + plainText.toUpperCase());
+            System.out.println(
+                "Pas ndarjes: L0="
+                + plainText.substring(0, 8).toUpperCase()
+                + " R0="
+                + plainText.substring(8, 16).toUpperCase() + "\n");
+
