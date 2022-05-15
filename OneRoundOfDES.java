@@ -1,7 +1,7 @@
 package siguri;
 
 import java.util.*;
-import java.util.*;
+
 
 public class OneRoundOfDES  {
     private static class DES {
