@@ -196,4 +196,65 @@ public class OneRoundOfDES  {
                 + plainText.substring(0, 8).toUpperCase()
                 + " R0="
                 + plainText.substring(8, 16).toUpperCase() + "\n");
+       
+            // 1 round
+           plainText = round(plainText, key, 0);
+
+            // 32-bit swap
+            plainText = plainText.substring(8, 16)
+                        + plainText.substring(0, 8);
+ 
+            // permutacioni final
+            plainText = permutation(IP1, plainText);
+            return plainText;
+        }
+ 
+        String decrypt(String plainText, String key)
+        {
+            
+ 
+        	  // permutacioni fillestar
+            plainText = permutation(IP, plainText);
+            System.out.println(
+                    "Pas permutacionit fillestar: "
+                    + plainText.toUpperCase());
+                System.out.println(
+                    "Pas ndarjes: L0="
+                    + plainText.substring(0, 8).toUpperCase()
+                    + " R0=" + plainText.substring(8, 16).toUpperCase()
+                    + "\n");
+ 
+         // 1-round
+           plainText = round(plainText, key, 0);
+        
+            // 32-bit swap
+            plainText = plainText.substring(8, 16)
+                        + plainText.substring(0, 8);
+            
+            plainText = permutation(IP1, plainText);
+            return plainText;
+        }
+    }
+    public static void main(String args[])
+    {
+        // text = 123456ABCD132536;
+       //  key = AABB09182736CCDD;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Jepni celsin:");
+        String key = scanner.next();
+       System.out.println("Jepni tekstin per enkriptim:");
+        String text = scanner.next();
+        scanner.close();
+        DES cipher = new DES();
+        System.out.println("Enkriptimi:\n");
+        text = cipher.encrypt(text, key);
+        System.out.println(
+            "\nCipher Text: " + text.toUpperCase() + "\n");
+        System.out.println("Dekriptimi\n");
+        text = cipher.decrypt(text, key);
+        System.out.println(
+            "\nPlain Text: "
+            + text.toUpperCase());
+    }
+}
 
