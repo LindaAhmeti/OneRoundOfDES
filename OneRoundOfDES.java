@@ -1,7 +1,7 @@
 package siguri;
 
 import java.util.*;
-import java.util.*;
+
 
 public class OneRoundOfDES  {
     private static class DES {
@@ -18,7 +18,7 @@ public class OneRoundOfDES  {
                      37, 29, 21, 13, 5, 63, 55,
                      47, 39, 31, 23, 15, 7 };
  
-     // Tabela e nd�rrimit fillestar t� anasjellt�
+     // Tabela e ndërrimit fillestar të anasjelltë
         int[] IP1 = { 40, 8, 48, 16, 56, 24, 64,
                       32, 39, 7, 47, 15, 55,
                       23, 63, 31, 38, 6, 46,
@@ -42,7 +42,7 @@ public class OneRoundOfDES  {
                      24, 25, 26, 27, 28, 29, 28,
                      29, 30, 31, 32, 1 };
  
-     // Tabela e permutacionit t� drejt�
+     // Tabela e permutacionit të drejtë
         int[] P = { 16, 7, 20, 21, 29, 12, 28,
                     17, 1, 15, 23, 26, 5, 18,
                     31, 10, 2, 8, 24, 14, 32,
